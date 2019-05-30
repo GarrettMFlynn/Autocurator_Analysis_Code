@@ -63,7 +63,9 @@ function [metrics] = contact_metrics_analyzer_var(autoCon, manCon, T)
     falseTouch(i) = numel(autoPoints) - numel(commonTouches);
     falseNonTouch(i) = numel(manPoints) - numel(commonTouches);
     agreePct(i) = 100*((4000 - falseTouch(i) - falseNonTouch(i))/4000);
+    if ~isempty(T.trials{i}.whiskerTrial)
     vel = nanmean(abs(diff((T.trials{i}.whiskerTrial.distanceToPoleCenter{1}))));
+    end
 
     % Find onsets
     if ~isempty(autoPoints)
@@ -123,6 +125,14 @@ function [metrics] = contact_metrics_analyzer_var(autoCon, manCon, T)
   end
   if ~exist('extraTouches','var')
       extraTouches = NaN;
+  end
+  
+  if ~exist('disagreedWholeTouches','var')
+      disagreedWholeTouches = NaN;
+  end
+  
+    if ~exist('humanTouches','var')
+      humanTouches = NaN;
   end
 
   %hold off
