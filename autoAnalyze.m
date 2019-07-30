@@ -18,6 +18,7 @@ if nargin == 3
             '\n(2) Display contact_metrics_analyzer results'
             '\n(3) Determine best cutoff values'
             '\n(4) Rewrite contact array given a specific cutoff'
+            '\n(5) Reverse contact array (cutoff = .5)'
             '\n\nDecision: '
             };
         
@@ -55,10 +56,18 @@ if nargin == 3
                 contactsAuto = rewriteContactArray(contactsAuto,cutoff);
                 output = contactsAuto
                 savedir = input('What directory would you like to save this array in?','s');
-                saveFile = [savedir '\rewritten_array_at_cutoff.mat']
+                saveFile = [savedir '\rewritten_array_at_cutoff(',num2str(cutoff),').mat']
                 save(saveFile, 'contactsAuto');
                 fprintf(['Contact array has been saved at ' saveFile]);
                 fprintf(['Output is now a rewritten contact array at Cutoff = ' num2str(cutoff) '\n']);
+            case 5
+                contactsAuto = reverseContactArray(contactsAuto);
+                output = contactsAuto
+                savedir = input('What directory would you like to save this array in?','s');
+                saveFile = [savedir '\reversed_array.mat']
+                save(saveFile, 'contactsAuto');
+                fprintf(['Contact array has been saved at ' saveFile]);
+                fprintf(['Output is now reversed\n']);
             otherwise
                 fprintf('Error: Not a valid input. If you wish to escape this function, press 0');
         end
