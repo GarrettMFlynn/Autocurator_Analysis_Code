@@ -53,7 +53,7 @@ if nargin == 3
                 fprintf(['Output is now the cutoff value(s) displayed above\n']);
             case 4
                 cutoff = input('What cutoff value would you like to use?\nCutoff:');
-                contactsAuto = rewriteContactArray(contactsAuto,cutoff);
+                contactsAuto = rewriteContactArray(T,contactsAuto,cutoff);
                 output = contactsAuto
                 savedir = input('What directory would you like to save this array in?','s');
                 saveFile = [savedir '\rewritten_array_at_cutoff(',num2str(cutoff),').mat']

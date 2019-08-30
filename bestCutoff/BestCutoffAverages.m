@@ -33,7 +33,7 @@ trials = 1:length(autoConTA);
 for i = 1:length(range)
 cutoff = range(i);
 fprintf('Cutoff = %.2f\n',  cutoff);
-tempConTA = rewriteContactArray(autoConTA,cutoff);
+tempConTA = rewriteContactArray(tArray,autoConTA,cutoff);
 metrics = contact_metrics_analyzer_var(tempConTA, manualConTA, tArray);
 average(i) = metrics.percentAgreedPoints;
 fprintf('\t%.2f\n',  average(i));

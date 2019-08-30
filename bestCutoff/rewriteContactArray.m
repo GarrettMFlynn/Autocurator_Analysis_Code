@@ -1,5 +1,5 @@
  
-function [contactsAuto] = rewriteContactArray(contactArray, cutoff) 
+function [contactsAuto] = rewriteContactArray(T,contactArray, cutoff) 
 % Written by Garrett Flynn (5/14/19) 
  
 % REWRITECONTACTARRAY converts an existing autocurated contact array into a 
@@ -32,8 +32,13 @@ for i = 1:numTrials % We want to iterate by trial
                 % conditional should be HIGHLY unlikely 
                 contactCell(j) = 1; 
             end 
-             
-        end 
+            
+        % Section to remove contacts at invalid time points: 
+         if ~ismember(j/1000, T.trials{i}.whiskerTrial.time{1}) 
+             contactCell(j) = 0; 
+         end 
+        end
+        
     end 
  
     % Remove lone touches 
