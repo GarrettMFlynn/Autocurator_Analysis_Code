@@ -9,7 +9,7 @@ function [contactsAuto] = rewriteContactArray(T,contactArray, cutoff)
 cArray = contactArray; 
 numTrials = length(contactArray); 
 for i = 1:numTrials % We want to iterate by trial 
-    contactCell = []; 
+    contactCell = zeros(1, numel(contactArray{i}.touchConfidence)); 
     if ~isempty(contactArray{i}) 
     if num2str(contactArray{i}.contactInds{1}) == "Skipped" || isempty(contactArray{i}.contactInds{1}) 
         continue 
