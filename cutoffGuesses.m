@@ -76,27 +76,28 @@ accPlotPositions = (normAccArray*diffPlotted) + minPlotted;
 %% Plotting
 figure(f1)
 
-markerSize = 300;
+markerSize = 25;
 
 % Plot Random Chance
-line([xmin,xmax], [0,0],'r');
-text(xmax,accPlotPositions(4),['\leftarrow' ' Random Chance ' num2str(percentDueToRandom) '%'],'FontSize', 10);
+line([xmin,xmax], [0,0],'color','r');
+text(xmax,0,['\leftarrow' 'Chance: ' num2str(percentDueToRandom) '%'],'FontSize', 10);
+text(xmax,ymax,['\leftarrow' ' Max: 100.00%'],'FontSize', 10);
 
 % Plot Averaged Results (cutoff AND accuracies)
-scatter(sessionCutoff,accPlotPositions(2),markerSize,'r')
-scatter(cutoffAveraged,accPlotPositions(3),markerSize,[0,191/255,255/255])
-scatter(topCut(1), accPlotPositions(1),markerSize,'g')
+scatter(sessionCutoff,accPlotPositions(2),markerSize,'MarkerFaceColor','r','MarkerEdgeColor','none');
+scatter(cutoffAveraged,accPlotPositions(3),markerSize,'MarkerFaceColor',[0,191/255,255/255],'MarkerEdgeColor','none');
+scatter(topCut(1), accPlotPositions(1),markerSize,'MarkerFaceColor','g','MarkerEdgeColor','none');
 text(topCut(1),accPlotPositions(1),['\leftarrow' ' Ground: S_a | ' num2str(accArray(1)) '%'],'FontSize', 10);
 text(sessionCutoff,accPlotPositions(2),['\leftarrow' ' Heuristic: S_a | ' num2str(accArray(2)) '%'],'FontSize', 10);
 text(cutoffAveraged,accPlotPositions(3),['\leftarrow' ' Heuristic: T_a | ' num2str(accArray(3)) '%'],'FontSize', 10);
 
 % Plot Accuracies for Trial-Specific Results (accuracies only)
-scatter(sessionCutoff,accPlotPositions(4),markerSize,'b')
-scatter(topCut(1),accPlotPositions(5),markerSize,[60/255,179/255,113/255])
-text(sessionCutoff,accPlotPositions(4),['\leftarrow' ' Heuristic: T_s | ' num2str(accArray(4)) '%'],'FontSize', 10);
-text(topCut(1),accPlotPositions(5),['\leftarrow' ' Ground: T_s | ' num2str(accArray(5)) '%'],'FontSize', 10);
+line([0,xmax],[accPlotPositions(4),accPlotPositions(4)],'color','b','LineWidth',1);
+line([0,xmax],[accPlotPositions(5),accPlotPositions(5)],'color',[60/255,179/255,113/255],'LineWidth',1);
+text(xmax,accPlotPositions(4),['\leftarrow' ' Heuristic: T_s ' num2str(accArray(4)) '%'],'FontSize', 10);
+text(xmax,accPlotPositions(5),['\leftarrow' ' Model Max: ' num2str(accArray(5)) '%'],'FontSize', 10);
 
-title('2032');
+title('2070');
 ax = gca;
 ax.TitleFontSizeMultiplier = 3;
 

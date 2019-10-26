@@ -70,9 +70,9 @@ defaultTrialFrames = 4000;
       deltaP = length(autoArray{i}.prepross);
       totalPoints = totalPoints + deltaP;
       processedP = length(find(autoArray{i}.prepross == 2));
-      uncuratedP = totalPoints - processedP;
+      uncuratedP = deltaP - processedP;
       correctPoints = correctPoints + uncuratedP + processedP/2;
       
   end
-  percentDueToChance = correctPoints/totalPoints;
+  percentDueToChance = 100*correctPoints/totalPoints;
 end
