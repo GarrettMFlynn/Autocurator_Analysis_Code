@@ -19,6 +19,10 @@ function [metrics] = contact_metrics_analyzer_var(autoCon, manCon, T)
   offsetDiff = zeros(numTrials, 1); % Average difference between touch offset of agreed touches (in ms)
   %touchDiff = zeros(numTrials, 1); % Total number of touches in trial disagreed upon
   for i = 1:numTrials
+      
+      
+      
+      
       try
           autoPoints = autoCon{i}.contactInds{1};
           manPoints = manCon{i}.contactInds{1};

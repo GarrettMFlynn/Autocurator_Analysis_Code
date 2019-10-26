@@ -9,13 +9,13 @@ function [contactsAuto] = rewriteContactArray(T,contactArray, cutoff)
 cArray = contactArray; 
 numTrials = length(contactArray); 
 for i = 1:numTrials % We want to iterate by trial 
-    contactCell = zeros(1, numel(contactArray{i}.touchConfidence)); 
     if ~isempty(contactArray{i}) 
     if num2str(contactArray{i}.contactInds{1}) == "Skipped" || isempty(contactArray{i}.contactInds{1}) 
         continue 
         % A negative one indicates that the trial array had no data 
         % and we should skip this trial 
     elseif isfield(contactArray{i},'touchConfidence') 
+        contactCell = zeros(1, numel(contactArray{i}.touchConfidence)); 
         cArray{i}.contactInds{1} = {}; 
         for j = 1:numel(contactArray{i}.touchConfidence) %Iterate through each point 
             con = contactArray{i}.touchConfidence; 
@@ -34,9 +34,9 @@ for i = 1:numTrials % We want to iterate by trial
             end 
             
         % Section to remove contacts at invalid time points: 
-         if ~ismember(j/1000, T.trials{i}.whiskerTrial.time{1}) 
-             contactCell(j) = 0; 
-         end 
+%          if ~ismember(j/1000, T.trials{i}.whiskerTrial.time{1}) 
+%              contactCell(j) = 0; 
+%          end 
         end
         
     end 

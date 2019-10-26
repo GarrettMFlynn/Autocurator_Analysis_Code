@@ -1,5 +1,5 @@
 %% A SEMI-REDUNDANT FUNCTION TO CALL DETERIMINECUTOFF
-function [cutoffs] = BestCutoffAverages(auto,man,T);
+function [topCutoffs, allCutoffs] = BestCutoffAverages(auto,man,T);
 % Written by Garrett Flynn (5/15/19)
 
 % BESTCUTOFF determines the best cutoff for a given autocurated contact
@@ -8,10 +8,9 @@ function [cutoffs] = BestCutoffAverages(auto,man,T);
 % averaged over the trials in a session.
 
     if exist('processedArray','var')
-        [cutoffs] = determineCutoff(auto, man, T);
-        
+        [topCutoffs,allCutoffs] = determineCutoff(auto, man, T);
     else
-        [cutoffs] = determineCutoff(auto, man, T);
+        [topCutoffs,allCutoffs] = determineCutoff(auto, man, T);
     end
     
     
@@ -19,7 +18,7 @@ end
 
 
 %% DETERMINE CUTOFF
-function [maxAgree] = determineCutoff(autoConTA, manualConTA, tArray)
+function [maxAgree,all] = determineCutoff(autoConTA, manualConTA, tArray)
 % DETERMINECUTOFF allows users to vary autocurated contacts arrays & find
 % the cutoff that maximizes agreement given predictions in the array AND a
 % manually curated array to match.
@@ -58,5 +57,6 @@ end
    Data = [top10cutoffs' top10values'];
    VarNames = {'cutoff', 'agreement'};
    maxAgree = table(Data(:,1),Data(:,2), 'VariableNames',VarNames)
+   all = table(range, average,'VariableNames',VarNames);
 
 end
