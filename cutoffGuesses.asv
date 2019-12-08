@@ -39,7 +39,7 @@ topAccuracy = topCutoffs.(2);
 allCuts = allCutoffs.(1);
 allAccuracy = allCutoffs.(2);
 
-%% Match Heuristic Cutoffs to Nearest Ground Truth Test
+%% Matcg Heuristic Cutoffs to Nearest Ground Truth Test
 [cutSessions,idx1] = closest(allCuts,sessionCutoff);
 [cutTrials,idx2] = closest(allCuts,cutoffAveraged);
 accSessions = allAccuracy(idx1);
@@ -92,12 +92,12 @@ text(sessionCutoff,accPlotPositions(2),['\leftarrow' ' Heuristic: S_a | ' num2st
 text(cutoffAveraged,accPlotPositions(3),['\leftarrow' ' Heuristic: T_a | ' num2str(accArray(3)) '%'],'FontSize', 10);
 
 % Plot Accuracies for Trial-Specific Results (accuracies only)
-line([0,xmax],[accPlotPositions(4),accPlotPositions(4)],'color','b','LineWidth',1);
+line([0,xmax],[accPlotPositions(4),accPlotPositions(4)],'color','b','LineWidth',5);
 line([0,xmax],[accPlotPositions(5),accPlotPositions(5)],'color',[60/255,179/255,113/255],'LineWidth',1);
 text(xmax,accPlotPositions(4),['\leftarrow' ' Heuristic: T_s ' num2str(accArray(4)) '%'],'FontSize', 10);
 text(xmax,accPlotPositions(5),['\leftarrow' ' Model Max: ' num2str(accArray(5)) '%'],'FontSize', 10);
 
-title('671A');
+title('2032');
 ax = gca;
 ax.TitleFontSizeMultiplier = 3;
 

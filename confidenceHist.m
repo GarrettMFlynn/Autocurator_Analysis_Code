@@ -9,21 +9,22 @@ switch mode
                 totalContacts = [totalContacts conf];
             end
         end
-        histogram(totalContacts)
+        histogram(totalContacts,16)
         out = 0;
     case 'plot-trial'
         num = varargin{1};
         if isfield(contacts{num}, 'touchConfidence') == 1
                 conf = contacts{num}.touchConfidence;
                 conf(conf==0) = [];
-                histogram(conf)
+                histogram(conf,16)
         end
         out = 0;
     case 'session-cutoff-averaged'
         numCons = length(contacts); 
+        conf = [];
         for i = 1:numCons
             if isfield(contacts{i}, 'touchConfidence') == 1
-                if i == 1
+                if isempty(conf)
                 conf = [contacts{i}.touchConfidence];
                 else
                     conf = [conf contacts{i}.touchConfidence];
@@ -32,7 +33,7 @@ switch mode
         end
                 conf(conf==0) = [];
                 [N, edges] = histcounts(conf, 16);
-                N(N<10) = 0;
+                %N(N<10) = 0;
                 [peaks, locs] = findpeaks([0 N 0]);
                 % Establish largest two peaks 
                 indices = edges(locs);
@@ -61,6 +62,7 @@ switch mode
                 indices = edges(locs);
                 if numel(peaks) < 2
                     outMat(i) = 0.5;
+                    display(i);
                 elseif numel(peaks) == 2
                     outMat(i) = (indices(1) + indices(2))/2;
                 else
