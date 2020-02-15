@@ -19,6 +19,7 @@ if nargin == 3
             '\n(3) Determine best cutoff values'
             '\n(4) Rewrite contact array given a specific cutoff'
             '\n(5) Reverse contact array (cutoff = .5)'
+            '\n(6) Session heatmap'
             '\n\nDecision: '
             };
         
@@ -68,6 +69,8 @@ if nargin == 3
                 save(saveFile, 'contactsAuto');
                 fprintf(['Contact array has been saved at ' saveFile]);
                 fprintf(['Output is now reversed\n']);
+            case 6
+                sessionHeatmap(T,contactsAuto,contacts);
             otherwise
                 fprintf('Error: Not a valid input. If you wish to escape this function, press 0');
         end
